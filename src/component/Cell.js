@@ -11,7 +11,7 @@ class Cell extends Component{
       value:props.value
     }
 
-    this.dispaly = this.determineDisplay(
+    this.display = this.determineDisplay(
       {x:props.x, y:props.y},
       props.value
     )

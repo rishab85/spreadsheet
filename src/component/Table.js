@@ -7,28 +7,31 @@ class Table extends Component{
   constructor(props){
     super(props)
 
-    this.state={
-      data:{},
-      styler:[],
-    }
 
-    const styles = [[]];
+
+    let styles = [[]];
+    let data = {};
     for(let y=0; y<this.props.y+1; y+=1){
       styles[y]=[];
       for(let x=0; x<this.props.x+1; x+=1){
         styles[y][x]="cells"
       }
     }
-    this.setState({
-      styler:styles
-    })
+
+    if(localStorage.getItem('sheet')){
+      data = JSON.parse(localStorage.getItem('sheet'));
+    }else{
+      data = {}
+    }
+
+    this.state={
+      data:data,
+      styler:styles,
+    }
   }
 
   componentWillMount(){
-    if(localStorage.getItem('sheet')){
-      const data = JSON.parse(localStorage.getItem('sheet'));
-      this.setState({data:data})
-    }
+
   }
 
   handleChangedCell = ({x,y},value) => {
@@ -76,6 +79,7 @@ class Table extends Component{
       for(let y=0; y<this.props.y+1; y+=1){
         const rowData = this.state.data[y] || {};
         const styleData = this.state.styler[y] || {};
+        
         rows.push(
           <Row
             handleChangedCell = {this.handleChangedCell}
@@ -87,7 +91,6 @@ class Table extends Component{
             y={y}
             x={this.props.x+1}
             rowData={rowData}
-            styleData={styleData}
           />
         )
       }
