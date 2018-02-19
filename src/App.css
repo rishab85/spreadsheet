@@ -5,3 +5,21 @@
 .font-italics{
   font-style: italic;
 }
+
+.color-red{
+  color:red !important;
+}
+
+.color-blue{
+  color:blue !important;
+}
+
+.redBtn{
+  color:red;
+  background-color: red ;
+}
+
+.blueBtn{
+  color:blue;
+  background-color: blue;
+}
