@@ -18,16 +18,13 @@ class Cell extends Component{
     this.timer = 0;
     this.delay = 200;
     this.prevent=false;
-    console.log('hello');
   }
 
   componentDidMount(){
     window.document.addEventListener('unselectAll', this.handleUnselectAll)
-    console.log('did mount')
   }
 
   componentWillUpdate(){
-    console.log('will update')
     this.display = this.determineDisplay(
       {x:this.props.x, y:this.props.y}, this.state.value
     )

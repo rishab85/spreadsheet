@@ -13,15 +13,22 @@ class Table extends Component{
     }
 
     const styles = [[]];
-
-    styles[0][0] = "hello";
     for(let y=0; y<this.props.y+1; y+=1){
       styles[y]=[];
       for(let x=0; x<this.props.x+1; x+=1){
         styles[y][x]="cells"
       }
     }
-    this.state.styler = styles;
+    this.setState({
+      styler:styles
+    })
+  }
+
+  componentWillMount(){
+    if(localStorage.getItem('sheet')){
+      const data = JSON.parse(localStorage.getItem('sheet'));
+      this.setState({data:data})
+    }
   }
 
   handleChangedCell = ({x,y},value) => {
@@ -31,12 +38,20 @@ class Table extends Component{
     this.setState({
       data : modifiedValue
     })
+
+    localStorage.setItem('sheet', JSON.stringify(this.state.data))
   }
 
   handleChangedStyle = ({x,y},value) => {
     const modifiedValue = this.state.styler
     if(!modifiedValue[y]) modifiedValue[y] = {}
-    modifiedValue[y][x] = value+ " " + modifiedValue[y][x]
+    if(modifiedValue[y][x].includes(value)){
+      modifiedValue[y][x]=modifiedValue[y][x].replace(value,'')
+      modifiedValue[y][x]=modifiedValue[y][x].trim()
+    }else{
+      modifiedValue[y][x] = value+ " " + modifiedValue[y][x]
+    }
+
     this.setState({
       styler : modifiedValue
     })
@@ -56,10 +71,8 @@ class Table extends Component{
     this.forceUpdate()
   }
   render(){
+
       const rows = [];
-
-
-
       for(let y=0; y<this.props.y+1; y+=1){
         const rowData = this.state.data[y] || {};
         const styleData = this.state.styler[y] || {};

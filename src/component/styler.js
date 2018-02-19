@@ -10,11 +10,13 @@ class Styler extends Component{
   }
   render(){
     return(
-      <div>
+      <div className="styler">
         <button type="submit" className="font-bold" name="font-bold" onClick={this.handleClick}>B</button>
         <button type="submit" className="font-italics" name="font-italics" onClick={this.handleClick}>I</button>
         <button type="submit" className="redBtn" name="color-red" onClick={this.handleClick}>A</button>
         <button type="submit" className="blueBtn" name="color-blue" onClick={this.handleClick}>A</button>
+        <button type="submit" className="btnDelete" name="delete-row" onClick={this.handleClick}>Delete Row</button>
+        <button type="submit" className="btnDelete" name="delete-row" onClick={this.handleClick}>Delete Column</button>
       </div>
     )
   }

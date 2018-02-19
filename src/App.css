@@ -1,3 +1,13 @@
+.styler{
+  padding :10px;
+  border : 1px solid #ececec;
+  width:auto;
+}
+
+button{
+  margin-right:2px;
+}
+
 .font-bold {
   font-weight: Bold;
 }
