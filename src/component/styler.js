@@ -20,6 +20,10 @@ class Styler extends Component{
   addRowColumn = (e) =>{
     this.props.addRowColumn(e.target.name);
   }
+
+  handleSearch = (e) =>{
+    this.props.handleSearch(e.target.value)
+  }
   render(){
     return(
       <div className="styler">
@@ -33,6 +37,9 @@ class Styler extends Component{
         <button type="submit" className="btnDelete" name="column" onClick={this.addRowColumn} title="Add Column">Add Column</button>
         <button type="submit" className="btnDelete" name="row" onClick={this.addRowColumn} title="Add Row">Add Row</button>
         <button type="submit" className="btnClear" name="clear-sheet" onClick={this.handleClear} title="Clear All">Clear</button>
+
+        <br/>
+        <input type="text" placeholder="Type to search" onChange={this.handleSearch}/>
       </div>
     )
   }

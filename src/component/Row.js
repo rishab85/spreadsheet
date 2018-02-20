@@ -20,8 +20,6 @@ const Row = (props) => {
         cell : 'cells'
       }
     }
-
-    console.log(value);
     cells.push(
       <Cell
       key={`${x}-${y}`}

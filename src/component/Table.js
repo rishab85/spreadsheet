@@ -26,8 +26,6 @@ class Table extends Component{
       data:data,
       styler:styles,
     }
-
-    console.log(this.state.styler);
   }
 
 
@@ -55,13 +53,19 @@ class Table extends Component{
 
   handleChangedStyle = ({x,y},value) => {
     const modifiedValue = this.state.data
-    if(!modifiedValue[y]) modifiedValue[y] = {}
-    if(modifiedValue[y][x]['cell'].includes(value)){
-      modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].replace(value,'')
-      modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].trim()
-    }else{
-      modifiedValue[y][x]['cell'] = value+ " " + modifiedValue[y][x]['cell']
-    }
+      if(!modifiedValue[y]) modifiedValue[y] = {}
+      if(modifiedValue[y][x]['cell'].includes(value)){
+        if(value==='selected'){
+          // modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].replace(value,'')
+          // modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].trim()
+          modifiedValue[y][x]['cell'] = value+ " " + modifiedValue[y][x]['cell']
+        }else{
+          modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].replace(value,'')
+          modifiedValue[y][x]['cell']=modifiedValue[y][x]['cell'].trim()
+        }
+      }else{
+        modifiedValue[y][x]['cell'] = value+ " " + modifiedValue[y][x]['cell']
+      }
 
     this.setState({
       styler : {cell:modifiedValue[y][x]['cell']}
@@ -128,12 +132,30 @@ class Table extends Component{
   handleDelete=(value)=>{
     console.log(value)
   }
+
+  handleSearch = (value) =>{
+    for(let y=0; y<this.props.table.y+1; y+=1){
+      if(this.state.data[y]){
+        for(let x=0; x<this.props.table.x+1; x+=1){
+            if(this.state.data[y][x] && this.state.data[y][x]['data'].toLowerCase()===value.toLowerCase()){
+              console.log(this.state.data[y][x]['data'].toLowerCase())
+              this.handleChangedStyle({x,y},"selected");
+            }else{
+            }
+          }
+        }
+    }
+
+    if(document.getElementsByClassName('selected').length>0){
+      document.getElementsByClassName('selected').item(0).classList.remove('selected');
+    }
+
+  }
   updateCells = () => {
     this.forceUpdate()
   }
   render(){
       const rows = [];
-      console.log(this.props.table.y);
       for(let y=0; y<this.props.y+1; y+=1){
         const rowData = this.state.data[y] || {};
         rows.push(
@@ -157,6 +179,7 @@ class Table extends Component{
           handleDelete = {this.handleDelete}
           handleClear = {this.handleClear}
           addRowColumn = {this.addRowColumn}
+          handleSearch = {this.handleSearch}
           />
           {rows}
         </div>
