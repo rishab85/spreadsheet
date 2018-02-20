@@ -1,11 +1,15 @@
+button{
+  margin : 0 2px 2px 0;
+}
+
+.cells{
+    cursor: cell;
+}
+
 .styler{
   padding :10px;
   border : 1px solid #ececec;
   width:auto;
-}
-
-button{
-  margin-right:2px;
 }
 
 .font-bold {

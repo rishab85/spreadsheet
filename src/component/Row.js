@@ -7,25 +7,33 @@ const Row = (props) => {
 
   const cells = [];
   const y = props.y;
-
-
-
-
-
+  let value={}
   for(let x=0; x<props.x; x+=1){
-    console.log(props.styler[x])
+    if(props.rowData[x]){
+      value={
+        data:props.rowData[x]['data'],
+        cell:props.rowData[x]['cell']
+      }
+    }else{
+      value={
+        data : '',
+        cell : 'cells'
+      }
+    }
+
+    console.log(value);
     cells.push(
       <Cell
       key={`${x}-${y}`}
       y={y}
       x={x}
-      styler = {props.styler[x]}
       onChangedValue={props.handleChangedCell}
       onStyleChanged={props.handleChangedStyle}
       updateCells={props.updateCells}
       handleClicked={props.handleClicked}
-      value={props.rowData[x]||''}
+      value={value}
     />)
+
   }
 
 

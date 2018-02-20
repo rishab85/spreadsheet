@@ -32,3 +32,10 @@ export function currentSelection(value){
     value
   }
 }
+
+export function tableStructure(value){
+  return{
+    type:"TABLE_STRUCTURE",
+    value
+  }
+}

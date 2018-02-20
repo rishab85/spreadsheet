@@ -8,12 +8,12 @@ class Cell extends Component{
 
     this.state={
       editing:false,
-      value:props.value
+      value:props.value['data']
     }
 
     this.display = this.determineDisplay(
       {x:props.x, y:props.y},
-      props.value
+      props.value['data']
     )
     this.timer = 0;
     this.delay = 200;
@@ -43,7 +43,7 @@ class Cell extends Component{
     })
 
     this.display = this.determineDisplay(
-      {x:this.props.x, y:this.props.y}, e.target.value
+      {x:this.props.x, y:this.props.y}, e.target.value['data']
     )
   }
 
@@ -98,7 +98,6 @@ class Cell extends Component{
       this.prevent = false
     }, this.delay)
     this.props.currentSelection({x:this.props.x,y:this.props.y});
-
   }
 
   doubleClicked = () => {
@@ -141,7 +140,7 @@ class Cell extends Component{
   }
 
   changeClicked=()=>{
-    console.log('i  m vikA ON SALE')
+
   }
 
   render(){
@@ -189,7 +188,8 @@ class Cell extends Component{
 
     return(
       <span
-      className={this.props.styler}
+      title="Double click to Edit"
+      className={this.props.value['cell']}
       onClick={e=>this.clicked(e)}
       onDoubleClick={e=>this.doubleClicked(e)}
       onKeyDown = {this.onKeyPressOnSpan}

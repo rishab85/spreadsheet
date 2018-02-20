@@ -47,3 +47,13 @@ export function currentSelection(state={}, action){
       return state;
   }
 }
+
+export function tableStructure(state={x:4,y:4}, action){
+  switch (action.type) {
+    case "TABLE_STRUCTURE":
+      return action.value
+
+    default:
+        return state;
+  }
+}
